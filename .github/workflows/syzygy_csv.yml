@@ -27,16 +27,10 @@ jobs:
 
       - name: Scrape Syzygy events
         run: |
-          python scripts/scrape_syzygy.py > syzygy_events.csv
-          echo "---- syzygy_events.csv (first 5 lines) ----"
+          python scripts/scrape_syzygy.py
+          echo "---- preview ----"
           head -n 5 syzygy_events.csv
-          echo "---- row count (excluding header) ----"
-          python - <<'PY'
-          import csv
-          with open("syzygy_events.csv", newline="", encoding="utf-8") as f:
-              n = sum(1 for _ in csv.reader(f)) - 1
-          print(n)
-          PY
+
 
       - name: Commit syzygy_events.csv
         run: |

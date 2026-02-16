@@ -1,4 +1,3 @@
-Wrote 2 rows -> syzygy_events.csv
-me,end_time,price_text,event_url,is_museum,source
+date,venue,title,category,start_time,end_time,price_text,event_url,is_museum,source
 2026-02-03,Syzygy SF,Work on Your Holiday Craft Kits at Hobby Hangs,Syzygy,,,,https://syzygysf.com/events/holiday-craft-kits-at-hobby-hangs,false,Syzygy
 2026-04-25,Syzygy SF,Strange New Worlds' Art Fair,Market,,,,https://syzygysf.com/events/strange-new-worlds-art-fair-call-for-artists,false,Syzygy

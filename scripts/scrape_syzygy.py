@@ -64,6 +64,12 @@ def weekly_dates(start: dt.date, end: dt.date, weekday: int):
         yield d
         d += dt.timedelta(days=7)
 
+def next_weekday(start: dt.date, weekday: int) -> dt.date:
+    # Next occurrence of weekday AFTER start (not including start day)
+    d = start + dt.timedelta(days=1)
+    offset = (weekday - d.weekday()) % 7
+    return d + dt.timedelta(days=offset)
+
 def add_row(rows, date_iso, title, category, start_time="", end_time="", event_url=BASE_URL + "#events"):
     rows.append({
         "date": date_iso,

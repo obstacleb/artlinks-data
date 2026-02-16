@@ -1,4 +1,4 @@
-name: Build Syzygy Events CSV
+name: Build Syzygy Events CSV (Syzygy)
 
 on:
   workflow_dispatch:
@@ -25,9 +25,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      - name: Fetch Syzygy events
+      - name: Scrape Syzygy events
         run: |
-          python scripts/fetch_syzygy.py
+          python scripts/scrape_syzygy.py > syzygy_events.csv
 
       - name: Commit syzygy_events.csv
         run: |

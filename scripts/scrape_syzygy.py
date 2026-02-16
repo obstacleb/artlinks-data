@@ -32,20 +32,13 @@ def main():
     r.raise_for_status()
 
     soup = BeautifulSoup(r.text, "html.parser")
-
-    # Strategy (robust):
-    # Find links that have a MM-DD-YYYY date in the same "row"/line of text on the page.
-    # On Syzygy's page, the special events show like:
-    # [Title link] 04-25-2026
     rows = []
 
-    # We'll scan all anchors, and look at the surrounding text for a date.
     for a in soup.select("a"):
         title = (a.get_text(" ", strip=True) or "").strip()
         if not title:
             continue
 
-        # Look at parent text (usually contains the date right after the link)
         parent_text = (a.parent.get_text(" ", strip=True) if a.parent else "")
         m = DATE_RE.search(parent_text)
         if not m:
@@ -57,7 +50,6 @@ def main():
         href = a.get("href") or ""
         event_url = urljoin(BASE_URL, href)
 
-        # Basic category heuristics
         t_low = title.lower()
         if "fair" in t_low or "market" in t_low:
             category = "Market"
@@ -66,22 +58,20 @@ def main():
         else:
             category = "Syzygy"
 
-        rows.append(
-            {
-                "date": date_iso,
-                "venue": "Syzygy SF",
-                "title": title,
-                "category": category,
-                "start_time": "",
-                "end_time": "",
-                "price_text": "",
-                "event_url": event_url,
-                "is_museum": "false",
-                "source": "Syzygy",
-            }
-        )
+        rows.append({
+            "date": date_iso,
+            "venue": "Syzygy SF",
+            "title": title,
+            "category": category,
+            "start_time": "",
+            "end_time": "",
+            "price_text": "",
+            "event_url": event_url,
+            "is_museum": "false",
+            "source": "Syzygy",
+        })
 
-    # Dedup
+    # dedupe
     seen = set()
     deduped = []
     for e in rows:
@@ -91,7 +81,6 @@ def main():
         seen.add(key)
         deduped.append(e)
 
-    # Sort by date then title
     deduped.sort(key=lambda x: (x["date"], x["title"].lower()))
 
     with open(OUT, "w", newline="", encoding="utf-8") as f:
@@ -99,6 +88,7 @@ def main():
         w.writeheader()
         w.writerows(deduped)
 
+    # Print to log (NOT into the CSV)
     print(f"Wrote {len(deduped)} rows -> {OUT}")
 
 if __name__ == "__main__":

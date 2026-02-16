@@ -153,9 +153,20 @@ def generate_recurring_events(today: dt.date, months_ahead: int):
         if g >= today:
             add_row(rows, g.isoformat(), "Hobby Hangs: Game Night", "Games", start_time="19:00", end_time="21:00", event_url=BASE_URL + "#events")
 
-    # We do NOT generate “Drink and Draw Every other Wednesday…”
-    # because it requires an anchor date (they say to use Meetup).
-    return rows
+      # Biweekly: Drink & Draw starting next Wednesday after today
+    first = next_weekday(today, WD["wednesday"])
+    d = first
+    while d <= end:
+        add_row(
+            rows,
+            d.isoformat(),
+            "Drink & Draw",
+            "Drink & Draw",
+            start_time="18:30",
+            end_time="20:30",
+            event_url=BASE_URL + "#events",
+        )
+        d += dt.timedelta(days=14)
 
 def dedupe(rows):
     seen = set()

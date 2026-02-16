@@ -1,9 +1,9 @@
-name: Build Sketchboard Events CSV
+name: Build Syzygy Events CSV
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "45 14 * * *" # daily ~6:45am PT
+    - cron: "30 14 * * *" # daily ~6:30am PT
 
 permissions:
   contents: write
@@ -25,14 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      - name: Fetch Sketchboard events
+      - name: Fetch Syzygy events
         run: |
-          python scripts/fetch_sketchboard.py
+          python scripts/fetch_syzygy.py
 
-      - name: Commit sketchboard_events.csv
+      - name: Commit syzygy_events.csv
         run: |
           git config user.name "artlinks-bot"
           git config user.email "artlinks-bot@users.noreply.github.com"
-          git add sketchboard_events.csv
-          git diff --staged --quiet || git commit -m "Update Sketchboard events CSV"
+          git add syzygy_events.csv
+          git diff --staged --quiet || git commit -m "Update Syzygy events CSV"
           git push

@@ -1,0 +1,43 @@
+name: Build Comix Experience CSV
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily (tweak as you like)
+    - cron: "41 14 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  build-comix-csv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 python-dateutil
+
+      - name: Run scraper
+        run: |
+          python scripts/scrape_comix.py
+
+      - name: Commit CSV if changed
+        run: |
+          if git status --porcelain | grep -q "comix_events.csv"; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add comix_events.csv
+            git commit -m "Update comix_events.csv"
+            git push
+          else
+            echo "No changes to commit."
+          fi

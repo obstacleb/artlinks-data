@@ -1,16 +1,11 @@
 date,venue,title,category,start_time,end_time,price_text,event_url,is_museum,source
-2026-03-19,Case for Making — Art Room (SF),Figure Drawing with Dave Muller,Figure Drawing,18:30,,$40.00,https://caseformaking.com/products/figure-drawing-with-dave-muller,false,Case for Making
-2026-03-20,Case for Making — Online,GIFT CARD,Workshop,17:00,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
-2026-03-20,Case for Making — Online,Gift Cards,Workshop,17:00,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
-2026-03-20,Case for Making — Online,Trees and Forests with Dave Muller,Workshop,17:00,,$40.00,https://caseformaking.com/products/trees-and-forests-with-dave-muller,false,Case for Making
-2026-03-20,Case for Making — Online,Workshop Recording,Workshop,17:00,,$40.00,https://caseformaking.com/products/workshop-recording,false,Case for Making
+2026-03-21,Case for Making — Online,GIFT CARD,Workshop,11:00,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
+2026-03-21,Case for Making — Online,Gift Cards,Workshop,11:00,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
 2026-03-21,Case for Making — Online,Seascapes: Ernst Haeckel with Claire Wilson,Workshop,11:00,,$40.00,https://caseformaking.com/products/seascapes-ernst-haeckel-with-claire-wilson,false,Case for Making
+2026-03-21,Case for Making — Online,Workshop Recording,Workshop,11:00,,$40.00,https://caseformaking.com/products/workshop-recording,false,Case for Making
 2026-03-22,Case for Making — Online,Mark Making: Yayoi Kusama with Melanie Lan,Workshop,11:00,,$40.00,https://caseformaking.com/products/marking-making-yayoi-kusama-with-melanie-lan,false,Case for Making
 2026-03-24,Case for Making — Art Room (SF),Color Mix & Match with Alexis Joseph,Workshop,18:30,,$80.00,https://caseformaking.com/products/color-mix-match-alexis-joseph,false,Case for Making
 2026-03-26,Case for Making — Online,Paint & Vintage Magazines with Erin McCluskey Wheeler,Zine,17:00,,$40.00,https://caseformaking.com/products/paint-vintage-magazines-with-erin-mccluskey-wheeler,false,Case for Making
-2026-03-26,Case for Making — Art Room (SF),Additional Art Room Workshop Spot,Workshop,18:30,,$40.00,https://caseformaking.com/products/additional-art-room-workshop-spot,false,Case for Making
-2026-03-26,Case for Making — Art Room (SF),GIFT CARD,Workshop,18:30,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
-2026-03-26,Case for Making — Art Room (SF),Gift Cards,Workshop,18:30,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
 2026-03-26,Case for Making — Art Room (SF),Watercolor and Drawing Club with Dave Muller,Workshop,18:30,,$40.00,https://caseformaking.com/products/watercolor-and-drawing-club-with-dave-muller,false,Case for Making
 2026-03-27,Case for Making — Art Room (SF),Bookbinding for Beginners with Ambika Jain,Workshop,18:30,,$80.00,https://caseformaking.com/products/bookbinding-for-beginners-with-ambika-jain,false,Case for Making
 2026-03-28,Case for Making — Online,Fluid Florals - Monochromatic Studies with Claire Wilson,Workshop,11:00,,$40.00,https://caseformaking.com/products/fluid-florals-monochromatic-studies-with-claire-wilson,false,Case for Making
@@ -18,3 +13,21 @@ date,venue,title,category,start_time,end_time,price_text,event_url,is_museum,sou
 2026-03-31,Case for Making — Art Room (SF),Art Room Studio Club!,Workshop,11:00,,$40.00,https://caseformaking.com/products/art-room-studio-club,false,Case for Making
 2026-03-31,Case for Making — Online,Intuitive Painting with Melanie Lan,Workshop,17:00,,$40.00,https://caseformaking.com/products/intuitive-painting-with-melanie-lan,false,Case for Making
 2026-04-04,Case for Making — Art Room (SF),Watercolor Paint-Making with Alexis Joseph,Workshop,14:00,,$225.00,https://caseformaking.com/products/watercolor-paint-making-with-alexis-joseph,false,Case for Making
+2026-04-08,Case for Making — Online,Meditation on Gego’s Geometry with Anjelika Deogirikar Grossman,Workshop,14:00,,$40.00,https://caseformaking.com/products/meditation-on-gegos-geometry-with-anjelika-deogirikar-grossman,false,Case for Making
+2026-04-09,Case for Making — Art Room (SF),Watercolor Landscapes with Claudia Solis,Workshop,18:30,,$80.00,https://caseformaking.com/products/watercolor-landscapes-with-claudia-solis,false,Case for Making
+2026-04-11,Case for Making — Online,Naturalist Studies: Eggs & Feathers with Melanie Lan,Workshop,11:00,,$40.00,https://caseformaking.com/products/naturalist-studies-eggs-feathers-with-melanie-lan,false,Case for Making
+2026-04-16,Case for Making — Online,Rex Ray inspired Painted Paper Collages with Erin McCluskey Wheeler,Workshop,17:00,,$40.00,https://caseformaking.com/products/rex-ray-inspired-painted-paper-collages-with-erin-mccluskey-wheeler,false,Case for Making
+2026-04-18,Case for Making — Online,Fluid Flora: Sakura Season with Claire Wilson-Oghedo,Workshop,11:00,,$40.00,https://caseformaking.com/products/fluid-flora-sakura-season-with-claire-wilson,false,Case for Making
+2026-04-21,Case for Making — Art Room (SF),A Special Evening with Lisa Solomon Celebrating her New Book!,Workshop,18:30,,$100.00,https://caseformaking.com/products/accordion-book-making-watercolor-meditation-with-lisa-solomon,false,Case for Making
+2026-04-22,Case for Making — Online,Butterflies with Sophie Tivona,Workshop,17:00,,$40.00,https://caseformaking.com/products/butterflies-with-sophie-tivona,false,Case for Making
+2026-04-23,Case for Making — Art Room (SF),Figure Drawing with Dave Muller,Figure Drawing,18:30,,$40.00,https://caseformaking.com/products/figure-drawing-with-dave-muller-1,false,Case for Making
+2026-04-24,Case for Making — Online,Hills Are Alive with Dave Muller,Workshop,17:00,,$40.00,https://caseformaking.com/products/hills-are-alive-with-dave-muller,false,Case for Making
+2026-04-24,Case for Making — Art Room (SF),Watercolor Basics: Swatches & Tests with Lindsay Stripling,Workshop,18:30,,$40.00,https://caseformaking.com/products/watercolor-basics-swatches-and-tests-with-lindsay-stripling,false,Case for Making
+2026-04-25,Case for Making — Online,Painted Produce - Spring Legumes with Claire Wilson-Oghedo,Workshop,11:00,,$40.00,https://caseformaking.com/products/painted-produce-spring-legumes-with-claire-wilson-oghedo,false,Case for Making
+2026-04-25,Case for Making — Art Room (SF),Intro to Gelli Plate Printing with Erin McCluskey Wheeler,Workshop,14:00,,$100.00,https://caseformaking.com/products/intro-to-gelli-plate-printing-with-erin-mccluskey-wheeler,false,Case for Making
+2026-04-26,Case for Making — Art Room (SF),Color Lab with Lena Wolff,Workshop,11:00,,$250.00,https://caseformaking.com/products/color-lab-with-lena-wolff,false,Case for Making
+2026-04-30,Case for Making — Online,Spring Greens with Melanie Lan,Workshop,17:00,,$40.00,https://caseformaking.com/products/spring-greens-with-melanie-lan,false,Case for Making
+2026-04-30,Case for Making — Art Room (SF),Additional Art Room Workshop Spot,Workshop,18:30,,$40.00,https://caseformaking.com/products/additional-art-room-workshop-spot,false,Case for Making
+2026-04-30,Case for Making — Art Room (SF),GIFT CARD,Workshop,18:30,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
+2026-04-30,Case for Making — Art Room (SF),Gift Cards,Workshop,18:30,,$40.00,https://caseformaking.com/products/cfm-gift-card,false,Case for Making
+2026-04-30,Case for Making — Art Room (SF),Watercolor and Drawing Club with Dave Muller,Workshop,18:30,,$40.00,https://caseformaking.com/products/watercolor-and-drawing-club-with-dave-muller-1,false,Case for Making

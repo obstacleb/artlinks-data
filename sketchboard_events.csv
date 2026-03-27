@@ -1,4 +1,4 @@
-date,venue,title,category,event_type,start_time,end_time,price_text,is_museum,museum_name,event_url,notes
+date,venue,title,category,event_type,start_time,end_time,price_text,is_museum,museum_name,event_url,notes,source,instagram_url
 2026-02-03,CAST SF,Sadira @ CAST,Sketchboard,Sketchboard,02:30,05:30,,false,,https://www.sketchboard.co/schedule/event-four-d2wwk-ea5hc-wg48c,
 2026-02-04,Sketchboard,Amina @ Madrone,Sketchboard,Sketchboard,02:30,04:30,,false,,https://www.sketchboard.co/schedule/amina-madrone,
 2026-02-05,Monument,Amber @ Monument,Sketchboard,Sketchboard,02:30,04:30,,false,,https://www.sketchboard.co/schedule/allan-monument,

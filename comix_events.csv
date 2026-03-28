@@ -1,4 +1,4 @@
-date,venue,title,category,start_time,end_time,price_text,event_url,is_museum,event_type,notes,source,instagram_url,museum_name
+date,venue,title,category,start_time,end_time,price_text,event_url,is_museum,source,event_type,notes,museum_name
 2025-04-01,Comix Experience Outpost,Events,Comics,,,,https://www.comixexperience.com/events/2025/4/1/april-2025s-graphic-novel-club,false,comix,comix,Live Stream / Online,
 2025-04-21,Comix Experience Outpost,Events,Comics,,,,https://www.comixexperience.com/events/2025/4/21/epic-but-short-signing-with-matthew-rosenberg-and-tyler-boss,false,comix,comix,,
 2025-05-01,Comix Experience Outpost,Events,Comics,,,,https://www.comixexperience.com/events/2025/5/1/may-2025s-graphic-novel-club-events,false,comix,comix,Live Stream / Online,

@@ -1,16 +1,7 @@
 #!/usr/bin/env python3
 """
-Scrape Mission Comics & Art upcoming events from Mission Local venue feed
-and output missioncomics_events.csv.
-
-Venue page (lists upcoming events with month headers/times):
-  https://missionlocal.org/venue/mission-comics-and-art/  :contentReference[oaicite:1]{index=1}
-
-CSV columns:
-  date, venue, title, category, start_time, end_time, price_text, event_url,
-  is_museum, source, event_type, notes, museum_name
+Scrape Mission Comics & Art upcoming events from Mission Local venue feed.
 """
-
 from __future__ import annotations
 
 import csv
@@ -27,18 +18,18 @@ START_URL = "https://missionlocal.org/venue/mission-comics-and-art/"
 BASE = "https://missionlocal.org"
 OUTPUT_CSV = "missioncomics_events.csv"
 
-SOURCE = "missioncomics"
-VENUE_DEFAULT = "Mission Comics & Art"
-CATEGORY_DEFAULT = "Comics"
-EVENT_TYPE = "comic_event"
-
+FIELDS = [
+    "date","venue","title","category","start_time","end_time",
+    "price_text","event_url","instagram_url","is_museum","museum_name","notes","source",
+]
 
 UA = "artlinks-data/1.0 (+https://github.com/obstacleb/artlinks-data)"
+VENUE_DEFAULT = "Mission Comics & Art"
 
-MONTH_YEAR_RE = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$", re.I)
-
-# Example line:
-# "Featured March 12 @ 4:00 pm - 6:00 pm"  :contentReference[oaicite:2]{index=2}
+MONTH_YEAR_RE = re.compile(
+    r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$",
+    re.I
+)
 FEATURED_TIME_RE = re.compile(
     r"\bFeatured\s+(?P<month>[A-Za-z]+)\s+(?P<day>\d{1,2})\s+@\s+"
     r"(?P<start>\d{1,2}:\d{2}\s*(?:am|pm))\s*-\s*(?P<end>\d{1,2}:\d{2}\s*(?:am|pm))",
@@ -53,37 +44,25 @@ def _get(url: str) -> str:
 def _clean(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "")).strip()
 
-def _to_hhmm(t: str) -> str:
-    dt = dateparser.parse(t)
-    return dt.strftime("%H:%M") if dt else ""
-
 def _infer_category(title: str, notes: str) -> str:
     t = (title or "").lower()
     n = (notes or "").lower()
-    if "signing" in t or "signing" in n:
-        return "Signing"
-    if "party" in t or "party" in n:
-        return "Party"
-    if "workshop" in t or "workshop" in n:
-        return "Workshop"
-    if "zine" in t or "zine" in n:
-        return "Zine"
-    return CATEGORY_DEFAULT
+    if "signing" in t or "signing" in n: return "Signing"
+    if "party" in t or "party" in n: return "Party"
+    if "workshop" in t or "workshop" in n: return "Workshop"
+    if "zine" in t or "zine" in n: return "Zine"
+    return "Comics"
 
 def _infer_price(notes: str) -> str:
     n = (notes or "").lower()
-    if "tickets are free" in n or "ticket is free" in n or "free" in n:
-        # keep it conservative: only mark Free if strongly suggested
-        if "tickets are free" in n or "ticket is free" in n or "free, but" in n or "free but" in n:
-            return "Free"
+    if "tickets are free" in n or "ticket is free" in n or "free, but" in n or "free but" in n:
+        return "Free"
     return ""
 
 def _find_next_link(soup: BeautifulSoup) -> Optional[str]:
-    # Try common Tribe Events nav classes, then fallback to anchor text match.
     a = soup.select_one("a.tribe-events-c-nav__next, a.tribe-events-nav-next a, a[rel='next']")
     if a and a.get("href"):
         return urljoin(BASE, a["href"])
-
     for cand in soup.find_all("a", href=True):
         if _clean(cand.get_text()).lower() == "next events":
             return urljoin(BASE, cand["href"])
@@ -91,25 +70,17 @@ def _find_next_link(soup: BeautifulSoup) -> Optional[str]:
 
 def _extract_events_from_page(html: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
-
-    # Track the current "Month YYYY" header as we walk the DOM.
-    current_month = None
     current_year = None
-
     events: list[dict] = []
 
-    # We walk through headings in order: month header is typically h3, event title is h4 with an <a>.
-    # If structure shifts, we still have the "Featured Month Day @ time - time" line to anchor date/time.
     for el in soup.find_all(["h3", "h4"]):
         if el.name == "h3":
             txt = _clean(el.get_text())
             m = MONTH_YEAR_RE.match(txt)
             if m:
-                current_month = m.group(1)
                 current_year = int(m.group(2))
             continue
 
-        # h4: event title + link
         if el.name == "h4":
             a = el.find("a", href=True)
             title = _clean(a.get_text()) if a else _clean(el.get_text())
@@ -117,22 +88,18 @@ def _extract_events_from_page(html: str) -> list[dict]:
                 continue
             event_url = urljoin(BASE, a["href"]) if a else ""
 
-            # Find the nearby "Featured ..." time line after the title.
             featured_line = None
             cursor = el
-            for _ in range(0, 25):
+            for _ in range(25):
                 cursor = cursor.find_next(string=True)
                 if not cursor:
                     break
                 line = _clean(str(cursor))
-                if not line:
-                    continue
-                if FEATURED_TIME_RE.search(line):
+                if line and FEATURED_TIME_RE.search(line):
                     featured_line = line
                     break
 
             if not featured_line:
-                # If no time line, skip (avoid emitting bad dates)
                 continue
 
             fm = FEATURED_TIME_RE.search(featured_line)
@@ -142,14 +109,8 @@ def _extract_events_from_page(html: str) -> list[dict]:
             day = int(fm.group("day"))
             start_raw = fm.group("start")
             end_raw = fm.group("end")
+            year = current_year or datetime.now().year
 
-            # Prefer the year from the nearest Month-Year header; fallback to parsing year from page context.
-            year = current_year
-            if year is None:
-                # last resort: assume current year
-                year = datetime.now().year
-
-            # Build a date
             dt_start = dateparser.parse(f"{month} {day} {year} {start_raw}")
             if not dt_start:
                 continue
@@ -158,13 +119,10 @@ def _extract_events_from_page(html: str) -> list[dict]:
             start_time = dt_start.strftime("%H:%M")
             end_time = dt_end.strftime("%H:%M") if dt_end else ""
 
-            # Notes: grab the first paragraph-ish text after venue line.
-            # We'll walk forward a bit and pick the first "long-ish" sentence.
             notes = ""
-            venue = VENUE_DEFAULT
             found_venue_line = False
             cursor2 = el
-            for _ in range(0, 60):
+            for _ in range(60):
                 cursor2 = cursor2.find_next(string=True)
                 if not cursor2:
                     break
@@ -178,26 +136,22 @@ def _extract_events_from_page(html: str) -> list[dict]:
                     notes = line
                     break
 
-            category = _infer_category(title, notes)
-            price_text = _infer_price(notes)
-
             events.append({
                 "date": dt_start.date().isoformat(),
-                "venue": venue,
+                "venue": VENUE_DEFAULT,
                 "title": title,
-                "category": category,
+                "category": _infer_category(title, notes),
                 "start_time": start_time,
                 "end_time": end_time,
-                "price_text": price_text,
+                "price_text": _infer_price(notes),
                 "event_url": event_url,
+                "instagram_url": "",
                 "is_museum": "false",
-                "source": SOURCE,
-                "event_type": EVENT_TYPE,
-                "notes": notes,
                 "museum_name": "",
+                "notes": notes,
+                "source": "Mission Comics & Art",
             })
 
-    # Dedup by URL+date+title
     dedup = {}
     for e in events:
         key = (e["event_url"], e["date"], e["title"])
@@ -209,48 +163,26 @@ def scrape() -> list[dict]:
     seen = set()
     all_events: list[dict] = []
 
-    # Follow "Next Events" pages if the site provides them
-    for _ in range(0, 10):
+    for _ in range(10):
         if url in seen:
             break
         seen.add(url)
-
         html = _get(url)
         all_events.extend(_extract_events_from_page(html))
-
         soup = BeautifulSoup(html, "html.parser")
         nxt = _find_next_link(soup)
         if not nxt:
             break
         url = nxt
 
-    # Sort
     all_events.sort(key=lambda r: (r["date"], r["start_time"], r["title"]))
     return all_events
 
-def write_csv(rows: list[dict], path: str) -> None:
-    fieldnames = [
-        "date",
-        "venue",
-        "title",
-        "category",
-        "start_time",
-        "end_time",
-        "price_text",
-        "event_url",
-        "is_museum",
-        "source",
-        "event_type",
-        "notes",
-        "museum_name",
-    ]
-    with open(path, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
+if __name__ == "__main__":
+    rows = scrape()
+    with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         for r in rows:
             w.writerow(r)
-
-if __name__ == "__main__":
-    rows = scrape()
-    write_csv(rows, OUTPUT_CSV)
     print(f"Wrote {len(rows)} rows to {OUTPUT_CSV}")

@@ -14,7 +14,6 @@ date,venue,title,category,start_time,end_time,price_text,event_url,instagram_url
 2026-03-17,Sketchboard @ Madrone Art Bar,Marisa @ Madrone,Drink & Draw,,,,$15 cash only (per Sketchboard),no,,https://www.sketchboard.co/schedule/marisa-madrone,Auto-imported: Sketchboard
 2026-03-24,Sketchboard @ Madrone Art Bar,Edie Eve @ Madrone,Drink & Draw,,,,$15 cash only (per Sketchboard),no,,https://www.sketchboard.co/schedule/edieeve-madrone,Auto-imported: Sketchboard
 2026-03-27,Sketchboard @ Madrone Art Bar,Drink n Draw @ Mothbelly Gallery,Drink & Draw,,,,$15 cash only (per Sketchboard),no,,https://www.sketchboard.co/schedule/drink-n-draw-mothbelly-gallery,Auto-imported: Sketchboard
-2026-03-27,MothBelly,Drink & Draw,drink-draw,,6pm,9pm,Free,false,,https://www.mothbelly.org/,
 2026-03-31,Sketchboard @ Madrone Art Bar,Indica @ Madrone Art Bar,Drink & Draw,,,,$15 cash only (per Sketchboard),no,,https://www.sketchboard.co/schedule/indica-madrone,Auto-imported: Sketchboard
 2026-04-04,MothBelly,Probably a Bad Idea by Dylan Clendenin,opening,,6pm,9pm,Free,false,,https://www.mothbelly.org/,
 2026-04-07,Sketchboard @ Madrone Art Bar,Rosenaldo @ Madrone Art Bar,Drink & Draw,,,,$15 cash only (per Sketchboard),no,,https://www.sketchboard.co/schedule/rosenaldo-monument,Auto-imported: Sketchboard
@@ -28,8 +27,8 @@ date,venue,title,category,start_time,end_time,price_text,event_url,instagram_url
 2026-10-18,Sketchboard (Figure),Rocky Horror Picture Show: Figure Drawing Salon,Figure Drawing,,,,,no,,https://www.sketchboard.co/schedule/rocky-horror-picture-show-figure-drawing-salon,Auto-imported: Sketchboard
 2026-10-27,Sketchboard @ Madrone Art Bar,Halloween Portrait Party @ Madrone Art Bar,Drink & Draw,,,,$15 cash only (per Sketchboard),no,,https://www.sketchboard.co/schedule/halloween-portrait-party,Auto-imported: Sketchboard
 2026-12-06,Sketchboard (Figure),Figure Drawing Marathon @ Monument,Figure Drawing,,,,,no,,https://www.sketchboard.co/schedule/figuredrawingmarathon-seafm-d2lmb,Auto-imported: Sketchboard
-2026-03-27,Moth Belly Gallery,Drink & Draw,drink-draw,6pm,9pm,Free,https://www.mothbelly.org/,https://www.instagram.com/p/DWRqDAhD9tb/,false,,,CSV
-2026-04-04,Moth Belly Gallery,Probably a Bad Idea by Dylan Clendenin,opening,6pm,9pm,Free,https://www.mothbelly.org/,https://www.instagram.com/p/DWUc5G_AUR8/,false,,,CSV
-2026-04-11,Moth Belly Gallery,Artist Talks,talk,1pm,3pm,Free,https://www.mothbelly.org/,,false,,,CSV
-2026-04-24,Moth Belly Gallery,Drink & Draw,drink-draw,6pm,9pm,Free,https://www.mothbelly.org/,,false,,,CSV
+2026-03-27,Moth Belly,Drink & Draw,drink-draw,6pm,9pm,Free,https://www.mothbelly.org/,https://www.instagram.com/p/DWRqDAhD9tb/,false,,,CSV
+2026-04-04,Moth Belly,Probably a Bad Idea by Dylan Clendenin,opening,6pm,9pm,Free,https://www.mothbelly.org/,https://www.instagram.com/p/DWUc5G_AUR8/,false,,,CSV
+2026-04-11,Moth Belly,Artist Talks,talk,1pm,3pm,Free,https://www.mothbelly.org/,,false,,,CSV
+2026-04-24,Moth Belly,Drink & Draw,drink-draw,6pm,9pm,Free,https://www.mothbelly.org/,,false,,,CSV
 2026-04-01,The Knockout,Drink & Draw,drink-draw,8pm,9pm,Free,,https://www.instagram.com/p/DUWkW88Eg42/,false,,Recurring,CSV

@@ -20,7 +20,10 @@ FIELDS = [
     "end_time",
     "price_text",
     "event_url",
+    "instagram_url",
     "is_museum",
+    "museum_name",
+    "notes",
     "source",
 ]
 
@@ -51,7 +54,6 @@ def month_iter(start: dt.date, months_ahead: int):
 
 
 def nth_weekday_of_month(year: int, month: int, weekday: int, n: int) -> dt.date:
-    # Find the n-th weekday (e.g., 2nd Wednesday) in a given month.
     d = dt.date(year, month, 1)
     offset = (weekday - d.weekday()) % 7
     d = d + dt.timedelta(days=offset)
@@ -60,7 +62,6 @@ def nth_weekday_of_month(year: int, month: int, weekday: int, n: int) -> dt.date
 
 
 def weekly_dates(start: dt.date, end: dt.date, weekday: int):
-    # All dates between [start, end] on a given weekday
     d = start
     offset = (weekday - d.weekday()) % 7
     d = d + dt.timedelta(days=offset)
@@ -70,7 +71,6 @@ def weekly_dates(start: dt.date, end: dt.date, weekday: int):
 
 
 def next_weekday(start: dt.date, weekday: int) -> dt.date:
-    # Next occurrence of weekday AFTER start (not including start day)
     d = start + dt.timedelta(days=1)
     offset = (weekday - d.weekday()) % 7
     return d + dt.timedelta(days=offset)
@@ -85,6 +85,9 @@ def add_row(
     end_time="",
     price_text="",
     event_url=BASE_URL + "#events",
+    instagram_url="",
+    museum_name="",
+    notes="",
 ):
     rows.append(
         {
@@ -96,17 +99,16 @@ def add_row(
             "end_time": end_time,
             "price_text": price_text,
             "event_url": event_url,
+            "instagram_url": instagram_url,
             "is_museum": "false",
+            "museum_name": museum_name,
+            "notes": notes,
             "source": "Syzygy",
         }
     )
 
 
 def scrape_special_events(soup: BeautifulSoup):
-    """
-    Finds linked items where the parent text contains a MM-DD-YYYY date,
-    like: [Title link] 04-25-2026
-    """
     rows = []
     for a in soup.select("a"):
         title = (a.get_text(" ", strip=True) or "").strip()
@@ -138,93 +140,44 @@ def scrape_special_events(soup: BeautifulSoup):
 
 
 def generate_recurring_events(today: dt.date, months_ahead: int):
-    """
-    Hardcode recurring rules based on the current Syzygy #events text.
-    (More robust than trying to parse prose every time.)
-    """
     rows = []
-
-    # range for weekly/biweekly generation
     end = today + dt.timedelta(days=30 * months_ahead)
 
     # Weekly: Jam Night (Mon 8–10)
     for d in weekly_dates(today, end, WD["monday"]):
-        add_row(
-            rows,
-            d.isoformat(),
-            "Jam Night",
-            "Music",
-            start_time="20:00",
-            end_time="22:00",
-            event_url=BASE_URL + "#events",
-        )
+        add_row(rows, d.isoformat(), "Jam Night", "Music",
+                start_time="20:00", end_time="22:00")
 
     # Weekly: Hobby Hangs (Tue 7–10)
     for d in weekly_dates(today, end, WD["tuesday"]):
-        add_row(
-            rows,
-            d.isoformat(),
-            "Hobby Hangs",
-            "Syzygy",
-            start_time="19:00",
-            end_time="22:00",
-            event_url=BASE_URL + "#events",
-        )
+        add_row(rows, d.isoformat(), "Hobby Hangs", "Syzygy",
+                start_time="19:00", end_time="22:00")
 
-    # Monthly rules
     for (yy, mm) in month_iter(today, months_ahead):
         # Zine Club — 2nd Wednesday (6–9)
         z = nth_weekday_of_month(yy, mm, WD["wednesday"], 2)
         if z >= today:
-            add_row(
-                rows,
-                z.isoformat(),
-                "Zine Club",
-                "Zine",
-                start_time="18:00",
-                end_time="21:00",
-                event_url=BASE_URL + "#events",
-            )
+            add_row(rows, z.isoformat(), "Zine Club", "Zine",
+                    start_time="18:00", end_time="21:00")
 
         # Flipside Record Club — 3rd Thursday (7–9)
         f = nth_weekday_of_month(yy, mm, WD["thursday"], 3)
         if f >= today:
-            add_row(
-                rows,
-                f.isoformat(),
-                "Flipside Record Club",
-                "Music",
-                start_time="19:00",
-                end_time="21:00",
-                event_url=BASE_URL + "#events",
-            )
+            add_row(rows, f.isoformat(), "Flipside Record Club", "Music",
+                    start_time="19:00", end_time="21:00")
 
         # Hobby Hangs: Game Night — 1st Tuesday (7–9)
         g = nth_weekday_of_month(yy, mm, WD["tuesday"], 1)
         if g >= today:
-            add_row(
-                rows,
-                g.isoformat(),
-                "Hobby Hangs: Game Night",
-                "Games",
-                start_time="19:00",
-                end_time="21:00",
-                event_url=BASE_URL + "#events",
-            )
+            add_row(rows, g.isoformat(), "Hobby Hangs: Game Night", "Games",
+                    start_time="19:00", end_time="21:00")
 
-    # Biweekly: Drink & Draw starting next Wednesday after today (6:30–8:30)
+    # Biweekly: Drink & Draw every other Wednesday (6:30–8:30)
     first = next_weekday(today, WD["wednesday"])
     d = first
     while d <= end:
-        add_row(
-            rows,
-            d.isoformat(),
-            "Drink & Draw",
-            "Drink & Draw",
-            start_time="18:30",
-            end_time="20:30",
-            event_url=BASE_URL + "#events",
-        )
+        add_row(rows, d.isoformat(), "Drink & Draw", "Drink & Draw",
+                start_time="18:30", end_time="20:30")
         d += dt.timedelta(days=14)
 
     return rows

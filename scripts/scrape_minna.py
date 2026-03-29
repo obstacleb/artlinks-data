@@ -12,23 +12,11 @@ LIST_URL = "https://111minnagallery.com/events/list/"
 OUT = "minna_events.csv"
 
 FIELDS = [
-    "date",
-    "venue",
-    "title",
-    "category",
-    "start_time",
-    "end_time",
-    "price_text",
-    "event_url",
-    "is_museum",
-    "source",
+    "date","venue","title","category","start_time","end_time",
+    "price_text","event_url","instagram_url","is_museum","museum_name","notes","source",
 ]
 
-SKIP_TITLES = {
-    "red door coffee",
-    "happy hour",
-    "private event",
-}
+SKIP_TITLES = {"red door coffee", "happy hour", "private event"}
 
 MONTHS = {
     "january": 1, "february": 2, "march": 3, "april": 4,
@@ -36,9 +24,6 @@ MONTHS = {
     "september": 9, "october": 10, "november": 11, "december": 12,
 }
 
-# Examples in the page:
-# "Featured February 17 @ 4:00 pm - 10:00 pm"
-# Sometimes it can omit "Featured", we just search the whole row text.
 DT_RE = re.compile(
     r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+"
     r"(\d{1,2})\s*@\s*"
@@ -72,23 +57,20 @@ def main():
     today = dt.date.today()
     year = today.year
 
-    # The list view groups by month headers like "February 2026"
-    # We'll update `year` as we encounter those headers.
-    month_header_re = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$", re.I)
+    month_header_re = re.compile(
+        r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$",
+        re.I
+    )
 
     rows = []
 
-    # Each event block uses h4 with a link for the title
-    # We'll walk through the page top to bottom and keep a running year based on month headers.
     for el in soup.select("body *"):
-        # Update year when we see a month header
         txt = el.get_text(" ", strip=True)
         m = month_header_re.match(txt or "")
         if m:
             year = int(m.group(2))
             continue
 
-        # Event titles appear as h4 links inside list blocks.
         if el.name not in ("h3", "h4"):
             continue
 
@@ -96,18 +78,13 @@ def main():
         if not a:
             continue
 
-        title = a.get_text(" ", strip=True) or ""
-        title_clean = title.strip()
-        if not title_clean:
-            continue
-
-        if title_clean.strip().lower() in SKIP_TITLES:
+        title_clean = (a.get_text(" ", strip=True) or "").strip()
+        if not title_clean or title_clean.lower() in SKIP_TITLES:
             continue
 
         href = a.get("href") or ""
         event_url = urljoin(BASE, href)
 
-        # The date/time line is usually near this title in the same event container.
         container = el.find_parent()
         block_text = container.get_text(" ", strip=True) if container else ""
         dm = DT_RE.search(block_text or "")
@@ -136,11 +113,13 @@ def main():
             "end_time": end_time,
             "price_text": "",
             "event_url": event_url,
+            "instagram_url": "",
             "is_museum": "false",
+            "museum_name": "",
+            "notes": "",
             "source": "111 Minna",
         })
 
-    # dedupe
     seen = set()
     out = []
     for r in rows:

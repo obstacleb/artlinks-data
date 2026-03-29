@@ -26,6 +26,7 @@ jobs:
           pip install requests beautifulsoup4
 
       - name: Scrape 111 Minna events
+        continue-on-error: true
         run: |
           python scripts/scrape_minna.py
 

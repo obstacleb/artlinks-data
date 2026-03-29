@@ -26,6 +26,7 @@ jobs:
           pip install requests beautifulsoup4
 
       - name: Scrape Moth Belly (Now Showing)
+        continue-on-error: true
         run: |
           python scripts/scrape_mothbelly.py
 

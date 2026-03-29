@@ -3,7 +3,7 @@ name: Build Case for Making Events CSV
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 15 * * *" # daily ~7:15am PT (adjust any time)
+    - cron: "15 15 * * *" # daily ~7:15am PT
 
 permissions:
   contents: write
@@ -26,6 +26,7 @@ jobs:
           pip install requests beautifulsoup4
 
       - name: Fetch Case for Making events
+        continue-on-error: true
         run: |
           python scripts/scrape_case.py
           echo "---- preview ----"

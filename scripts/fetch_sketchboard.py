@@ -7,6 +7,11 @@ COLLECTION_ID = "6949d6a566f9574d9d6216f2"
 MONTHS_AHEAD = 6
 OUT = "sketchboard_events.csv"
 
+FIELDS = [
+    "date","venue","title","category","start_time","end_time",
+    "price_text","event_url","instagram_url","is_museum","museum_name","notes","source",
+]
+
 def month_key(d: dt.date) -> str:
     return f"{d.month:02d}-{d.year}"
 
@@ -18,8 +23,6 @@ def iso_date_from_ms(ms):
 def time_from_ms(ms):
     if not ms:
         return ""
-    # keep local-ish display stable by formatting in UTC then letting your UI show times;
-    # or change to local if you want.
     t = dt.datetime.utcfromtimestamp(ms/1000).time()
     return t.strftime("%H:%M")
 
@@ -45,7 +48,6 @@ def main():
         month_items = fetch_month(key)
         if isinstance(month_items, list):
             items.extend(month_items)
-        # advance one month
         year = d.year + (1 if d.month == 12 else 0)
         month = 1 if d.month == 12 else d.month + 1
         d = dt.date(year, month, 1)
@@ -53,9 +55,9 @@ def main():
     rows = []
     for it in items:
         start_ms = it.get("startDate") or (it.get("structuredContent") or {}).get("startDate")
-        end_ms = it.get("endDate") or (it.get("structuredContent") or {}).get("endDate")
-        date = iso_date_from_ms(start_ms)
-        if not date:
+        end_ms   = it.get("endDate")   or (it.get("structuredContent") or {}).get("endDate")
+        event_date = iso_date_from_ms(start_ms)
+        if not event_date:
             continue
 
         loc = it.get("location") or {}
@@ -64,21 +66,21 @@ def main():
         event_url = f"https://www.sketchboard.co{full_url}" if full_url else ""
 
         rows.append({
-            "date": date,
-            "venue": venue,
-            "title": it.get("title") or "Untitled",
-            "category": first_category(it),
-            "event_type": "Sketchboard",
-            "start_time": time_from_ms(start_ms),
-            "end_time": time_from_ms(end_ms),
-            "price_text": "",
-            "is_museum": "false",
-            "museum_name": "",
-            "event_url": event_url,
-            "notes": "",
+            "date":          event_date,
+            "venue":         venue,
+            "title":         it.get("title") or "Untitled",
+            "category":      first_category(it),
+            "start_time":    time_from_ms(start_ms),
+            "end_time":      time_from_ms(end_ms),
+            "price_text":    "",
+            "event_url":     event_url,
+            "instagram_url": "",
+            "is_museum":     "false",
+            "museum_name":   "",
+            "notes":         "",
+            "source":        "Sketchboard",
         })
 
-    # dedupe
     seen = set()
     deduped = []
     for r in sorted(rows, key=lambda x: (x["date"], x["start_time"], x["title"])):
@@ -89,10 +91,7 @@ def main():
         deduped.append(r)
 
     with open(OUT, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(deduped[0].keys()) if deduped else [
-            "date","venue","title","category","event_type","start_time","end_time",
-            "price_text","is_museum","museum_name","event_url","notes"
-        ])
+        w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(deduped)
 

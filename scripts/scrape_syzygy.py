@@ -29,9 +29,11 @@ def fmt_time(dt_val):
     return ""
 
 def main():
-    with urlopen(ICAL_URL) as f:
-        cal = Calendar.from_ical(f.read())
-
+    import requests
+    response = requests.get(ICAL_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
+    response.raise_for_status()
+    cal = Calendar.from_ical(response.content)
+    
     rows = []
     for component in cal.walk():
         if component.name != "VEVENT":

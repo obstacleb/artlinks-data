@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-from icalendar import Calendar
 import csv, datetime, zoneinfo, requests
+from icalendar import Calendar
+import recurring_ical_events
 
 ICAL_URL = (
     "https://calendar.google.com/calendar/ical/"
@@ -42,10 +43,13 @@ def main():
     response.raise_for_status()
     cal = Calendar.from_ical(response.content)
 
+    today = datetime.date.today()
+    end = today + datetime.timedelta(days=180)
+
+    events = recurring_ical_events.of(cal).between(today, end)
+
     rows = []
-    for component in cal.walk():
-        if component.name != "VEVENT":
-            continue
+    for component in events:
         dtstart = component.get("DTSTART")
         if not dtstart:
             continue

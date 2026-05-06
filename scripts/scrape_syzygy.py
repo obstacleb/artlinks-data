@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from icalendar import Calendar
-import csv, datetime
-from urllib.request import urlopen
+import csv, datetime, requests
 
 ICAL_URL = (
     "https://calendar.google.com/calendar/ical/"
@@ -29,11 +28,10 @@ def fmt_time(dt_val):
     return ""
 
 def main():
-    import requests
     response = requests.get(ICAL_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
     response.raise_for_status()
     cal = Calendar.from_ical(response.content)
-    
+
     rows = []
     for component in cal.walk():
         if component.name != "VEVENT":
@@ -69,6 +67,7 @@ def main():
             "notes": desc[:200], "source": "Syzygy",
         })
 
+    print(f"Found {len(rows)} events before filtering")
     rows.sort(key=lambda r: r["date"])
     with open(OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)

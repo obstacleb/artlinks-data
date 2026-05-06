@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from icalendar import Calendar
-import csv, datetime, requests
+import csv, datetime, zoneinfo, requests
 
 ICAL_URL = (
     "https://calendar.google.com/calendar/ical/"
@@ -8,6 +8,7 @@ ICAL_URL = (
     "%40group.calendar.google.com/public/basic.ics"
 )
 OUT = "syzygy_events.csv"
+PACIFIC = zoneinfo.ZoneInfo("America/Los_Angeles")
 FIELDS = ["date","venue","title","category","start_time","end_time",
           "price_text","event_url","instagram_url","is_museum","museum_name","notes","source"]
 
@@ -23,9 +24,18 @@ def guess_category(title, desc):
     return "Other"
 
 def fmt_time(dt_val):
+    if not hasattr(dt_val, "hour"):
+        return ""
+    if hasattr(dt_val, "tzinfo") and dt_val.tzinfo:
+        dt_val = dt_val.astimezone(PACIFIC)
+    return dt_val.strftime("%-I:%M %p")
+
+def to_pacific_date(dt_val):
     if hasattr(dt_val, "hour"):
-        return dt_val.strftime("%-I:%M %p")
-    return ""
+        if hasattr(dt_val, "tzinfo") and dt_val.tzinfo:
+            dt_val = dt_val.astimezone(PACIFIC)
+        return dt_val.strftime("%Y-%m-%d")
+    return dt_val.isoformat()
 
 def main():
     response = requests.get(ICAL_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
@@ -40,15 +50,11 @@ def main():
         if not dtstart:
             continue
         dt = dtstart.dt
-        if hasattr(dt, "date"):
-            date_str = dt.strftime("%Y-%m-%d")
-            start_time = fmt_time(dt)
-        else:
-            date_str = dt.isoformat()
-            start_time = ""
+        date_str = to_pacific_date(dt)
+        start_time = fmt_time(dt)
 
         dtend = component.get("DTEND")
-        end_time = fmt_time(dtend.dt) if dtend and hasattr(dtend.dt, "hour") else ""
+        end_time = fmt_time(dtend.dt) if dtend else ""
 
         title = str(component.get("SUMMARY", "")).strip()
         desc  = str(component.get("DESCRIPTION", "")).strip()
@@ -67,7 +73,7 @@ def main():
             "notes": desc[:200], "source": "Syzygy",
         })
 
-    print(f"Found {len(rows)} events before filtering")
+    print(f"Found {len(rows)} events")
     rows.sort(key=lambda r: r["date"])
     with open(OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)

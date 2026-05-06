@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import csv
 import datetime as dt
+import zoneinfo
 import requests
 
 COLLECTION_ID = "6949d6a566f9574d9d6216f2"
 MONTHS_AHEAD = 6
 OUT = "sketchboard_events.csv"
+PACIFIC = zoneinfo.ZoneInfo("America/Los_Angeles")
 
 FIELDS = [
     "date","venue","title","category","start_time","end_time",
@@ -18,13 +20,13 @@ def month_key(d: dt.date) -> str:
 def iso_date_from_ms(ms):
     if not ms:
         return ""
-    return dt.datetime.utcfromtimestamp(ms/1000).date().isoformat()
+    return dt.datetime.fromtimestamp(ms/1000, tz=PACIFIC).date().isoformat()
 
 def time_from_ms(ms):
     if not ms:
         return ""
-    t = dt.datetime.utcfromtimestamp(ms/1000).time()
-    return t.strftime("%H:%M")
+    t = dt.datetime.fromtimestamp(ms/1000, tz=PACIFIC)
+    return t.strftime("%-I:%M %p")
 
 def fetch_month(key: str):
     url = "https://www.sketchboard.co/api/open/GetItemsByMonth"
@@ -42,7 +44,6 @@ def main():
     today = dt.date.today()
     items = []
     d = today
-
     for _ in range(MONTHS_AHEAD):
         key = month_key(d)
         month_items = fetch_month(key)
@@ -59,12 +60,10 @@ def main():
         event_date = iso_date_from_ms(start_ms)
         if not event_date:
             continue
-
         loc = it.get("location") or {}
         venue = loc.get("addressTitle") or loc.get("addressLine1") or "Sketchboard"
         full_url = it.get("fullUrl") or ""
         event_url = f"https://www.sketchboard.co{full_url}" if full_url else ""
-
         rows.append({
             "date":          event_date,
             "venue":         venue,
@@ -94,7 +93,6 @@ def main():
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(deduped)
-
     print(f"Wrote {len(deduped)} rows -> {OUT}")
 
 if __name__ == "__main__":

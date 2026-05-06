@@ -1,33 +1,115 @@
-name: Build Syzygy Events CSV
+#!/usr/bin/env python3
+"""
+scrape_syzygy.py
+Fetches Syzygy SF's public Google Calendar iCal feed and writes syzygy_events.csv
+"""
 
-on:
-  workflow_dispatch:        # run manually from the Actions tab
-  schedule:
-    - cron: "0 8 * * 1"    # every Monday at 8am UTC (re-generates weekly)
+import csv
+import re
+from datetime import datetime, timezone
+from urllib.request import urlopen
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+try:
+    from icalendar import Calendar
+except ImportError:
+    raise SystemExit("Run: pip install icalendar")
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+ICAL_URL = (
+    "https://calendar.google.com/calendar/ical/"
+    "ab5594c927f49b0fdbac6df5105baab13fa8c85a557455199d4ffe8a1e3d2727"
+    "%40group.calendar.google.com/public/basic.ics"
+)
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+OUT_FILE = "syzygy_events.csv"
 
-      - name: Install dependencies
-        run: pip install requests beautifulsoup4
+FIELDNAMES = [
+    "date", "venue", "title", "category", "start_time", "end_time",
+    "price_text", "event_url", "instagram_url", "is_museum",
+    "museum_name", "notes", "source",
+]
 
-      - name: Run scraper
-        run: python scrape_syzygy.py
+def guess_category(title: str, desc: str) -> str:
+    t = (title + " " + desc).lower()
+    if "drink" in t and "draw" in t:   return "Drink & Draw"
+    if "figure" in t or "life draw" in t: return "Figure Drawing"
+    if "workshop" in t:                return "Workshop"
+    if "zine" in t:                    return "Zine"
+    if "open jam" in t or "jam" in t:  return "Community"
+    if "hobby hang" in t:              return "Community"
+    if "flipside" in t:                return "Community"
+    if "movie" in t or "film" in t:    return "Other"
+    if "open mic" in t or "reading" in t: return "Talk"
+    return "Other"
 
-      - name: Commit updated CSV
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add syzygy_events.csv
-          git diff --cached --quiet || git commit -m "chore: update syzygy_events.csv [skip ci]"
-          git push
+def fmt_time(dt) -> str:
+    if dt is None:
+        return ""
+    if hasattr(dt, "hour"):
+        return dt.strftime("%-I:%M %p").lstrip("0") or ""
+    return ""
+
+def parse_ical(url: str) -> list[dict]:
+    with urlopen(url) as f:
+        cal = Calendar.from_ical(f.read())
+
+    rows = []
+    for component in cal.walk():
+        if component.name != "VEVENT":
+            continue
+
+        dtstart = component.get("DTSTART")
+        if dtstart is None:
+            continue
+
+        dt = dtstart.dt
+        # Convert to local date — treat as-is if already date
+        if hasattr(dt, "date"):
+            date_str = dt.astimezone(timezone.utc).strftime("%Y-%m-%d") if hasattr(dt, "tzinfo") else dt.strftime("%Y-%m-%d")
+            start_time = fmt_time(dt)
+        else:
+            date_str = dt.isoformat()
+            start_time = ""
+
+        dtend = component.get("DTEND")
+        end_time = ""
+        if dtend:
+            end_dt = dtend.dt
+            if hasattr(end_dt, "hour"):
+                end_time = fmt_time(end_dt)
+
+        title   = str(component.get("SUMMARY", "")).strip()
+        desc    = str(component.get("DESCRIPTION", "")).strip()
+        url_val = str(component.get("URL", "")).strip()
+
+        # Skip internal/hold events
+        if title.upper().startswith("[HOLD]") or title.lower().startswith("hold;"):
+            continue
+
+        rows.append({
+            "date":          date_str,
+            "venue":         "Syzygy Artists Co-Op",
+            "title":         title,
+            "category":      guess_category(title, desc),
+            "start_time":    start_time,
+            "end_time":      end_time,
+            "price_text":    "",
+            "event_url":     url_val or "https://syzygysf.com/#events",
+            "instagram_url": "https://www.instagram.com/syzygycoop",
+            "is_museum":     "false",
+            "museum_name":   "",
+            "notes":         desc[:200] if desc else "",
+            "source":        "Syzygy",
+        })
+
+    return sorted(rows, key=lambda r: r["date"])
+
+def main():
+    rows = parse_ical(ICAL_URL)
+    with open(OUT_FILE, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(rows)
+    print(f"Wrote {len(rows)} events to {OUT_FILE}")
+
+if __name__ == "__main__":
+    main()

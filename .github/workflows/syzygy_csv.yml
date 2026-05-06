@@ -24,7 +24,7 @@ jobs:
         run: pip install icalendar requests
 
       - name: Run scraper
-        run: pip install icalendar requests beautifulsoup4
+        run: python scripts/scrape_syzygy.py
 
       - name: Commit updated CSV
         run: |

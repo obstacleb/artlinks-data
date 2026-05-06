@@ -19,7 +19,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install icalendar
+        run: pip install icalendar requests
 
       - name: Run scraper
         run: python scripts/scrape_syzygy.py

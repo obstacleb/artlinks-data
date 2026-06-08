@@ -1,11 +1,4 @@
 date,venue,title,category,start_time,end_time,price_text,event_url,instagram_url,is_museum,museum_name,notes,source
-2026-06-01,Syzygy Artists Co-Op,Open Jam,Community,8:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"You are welcome to join Syzygy's open jam nights! Please join our Discord channel and RSVP when we announce each event if you are planning to attend.
-Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
-2026-06-02,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
-2026-06-02,Syzygy Artists Co-Op,STudious STuesday,Other,1:30 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Co-working at Syzygy. Check in on our discord channel #studious-stuesdays to confirm time: <a href=""https://discord.com/channels/467106621072474113/1056994256176283718"">https://discord.com/channels/46",Syzygy
-2026-06-03,Syzygy Artists Co-Op,Drink and Draw,Drink & Draw,6:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,,Syzygy
-2026-06-05,Syzygy Artists Co-Op,Bad movie night: Undefeatable,Other,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,,Syzygy
-2026-06-07,Syzygy Artists Co-Op,Monthly Cleaning Party!,Other,1:00 PM,4:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Grime-fighters, unite! We do a deep clean of Syzygy each month to keep our space clean and ready for our community events. Help your co-op by putting a little of your energy into the space that gives ",Syzygy
 2026-06-08,Syzygy Artists Co-Op,Syz Meeting,Other,7:00 PM,8:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Join with Google Meet: https://meet.google.com/doi-cjco-din
 
 Learn more about Meet at: https://support.google.com/a/users/answer/9282720",Syzygy
@@ -13,9 +6,7 @@ Learn more about Meet at: https://support.google.com/a/users/answer/9282720",Syz
 Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
 2026-06-09,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
 2026-06-09,Syzygy Artists Co-Op,STudious STuesday,Other,1:30 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Co-working at Syzygy. Check in on our discord channel #studious-stuesdays to confirm time: <a href=""https://discord.com/channels/467106621072474113/1056994256176283718"">https://discord.com/channels/46",Syzygy
-2026-06-10,Syzygy Artists Co-Op,Cult Movie Night: [TITLE],Other,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Syzygy presents Cult Movie Night! A movie event where the cult following is just as important as the unlikely movie itself. This month we're watching [title]. [Premise]
-
-Chill movie night where talkin",Syzygy
+2026-06-10,Syzygy Artists Co-Op,Cult Movie Night: Kids in the Hall: Brain Candy,Other,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,Syzygy presents Cult Movie Night! A movie event where the cult following is just as important as the unlikely movie itself. This month we're watching Kids in the Hall: Brain Candy. A corrupt company r,Syzygy
 2026-06-14,Syzygy Artists Co-Op,[PRIVATE EVENT] SURJ Event,Other,11:00 AM,2:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,Private event in partnership with SURJ SF. Only open to SURJ and Syz members.,Syzygy
 2026-06-15,Syzygy Artists Co-Op,Open Jam,Community,8:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"You are welcome to join Syzygy's open jam nights! Please join our Discord channel and RSVP when we announce each event if you are planning to attend.
 Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
@@ -32,19 +23,18 @@ Learn more about Meet at: https://support.google.com/a/users/answer/9282720",Syz
 Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
 2026-06-23,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
 2026-06-23,Syzygy Artists Co-Op,STudious STuesday,Other,1:30 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Co-working at Syzygy. Check in on our discord channel #studious-stuesdays to confirm time: <a href=""https://discord.com/channels/467106621072474113/1056994256176283718"">https://discord.com/channels/46",Syzygy
-2026-06-26,Syzygy Artists Co-Op,Pretentious Movie Night: [title],Other,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Syzygy presents its next pretentious movie night! This month we're watching [title]. [Premise]
-
-Chill movie night where talking during the movie is okay (think like a sleepover at your friend's place)",Syzygy
+2026-06-26,Syzygy Artists Co-Op,Pretentious Movie Night: The Watermelon Woman,Other,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Syzygy presents its next pretentious movie night! This month we're watching The Watermelon Woman. A young black lesbian filmmaker probes into the life of The Watermelon Woman, a 1930s black actress wh",Syzygy
+2026-06-27,Syzygy Artists Co-Op,Syzygy Open House,Other,2:00 PM,6:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Open to the public 
+Snacks offered",Syzygy
 2026-06-27,Syzygy Artists Co-Op,Pride Party: Disco,Other,8:00 PM,12:00 AM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Open to members, prospective members, and friends they invite 
 Using whole space 
 Snacks & drinks offered",Syzygy
-2026-06-27,Syzygy Artists Co-Op,Syzygy Open House,Other,2:00 PM,6:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Open to the public 
-Snacks offered",Syzygy
 2026-06-29,Syzygy Artists Co-Op,Open Jam,Community,8:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"You are welcome to join Syzygy's open jam nights! Please join our Discord channel and RSVP when we announce each event if you are planning to attend.
 Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
 2026-06-30,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
 2026-06-30,Syzygy Artists Co-Op,STudious STuesday,Other,1:30 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Co-working at Syzygy. Check in on our discord channel #studious-stuesdays to confirm time: <a href=""https://discord.com/channels/467106621072474113/1056994256176283718"">https://discord.com/channels/46",Syzygy
 2026-07-01,Syzygy Artists Co-Op,Drink and Draw,Drink & Draw,6:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,,Syzygy
+2026-07-02,Syzygy Artists Co-Op,Hold - Solidarity Screening,Other,6:00 PM,9:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,,Syzygy
 2026-07-05,Syzygy Artists Co-Op,Monthly Cleaning Party!,Other,1:00 PM,4:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Grime-fighters, unite! We do a deep clean of Syzygy each month to keep our space clean and ready for our community events. Help your co-op by putting a little of your energy into the space that gives ",Syzygy
 2026-07-06,Syzygy Artists Co-Op,Syz Meeting,Other,7:00 PM,8:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Join with Google Meet: https://meet.google.com/doi-cjco-din
 
@@ -56,6 +46,7 @@ Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
 2026-07-08,Syzygy Artists Co-Op,Cult Movie Night: [TITLE],Other,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Syzygy presents Cult Movie Night! A movie event where the cult following is just as important as the unlikely movie itself. This month we're watching [title]. [Premise]
 
 Chill movie night where talkin",Syzygy
+2026-07-11,Syzygy Artists Co-Op,hold -- miniature painting,Other,1:00 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,,Syzygy
 2026-07-13,Syzygy Artists Co-Op,Open Jam,Community,8:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"You are welcome to join Syzygy's open jam nights! Please join our Discord channel and RSVP when we announce each event if you are planning to attend.
 Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
 2026-07-14,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
@@ -223,3 +214,8 @@ Learn more about Meet at: https://support.google.com/a/users/answer/9282720",Syz
 Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
 2026-11-24,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
 2026-11-24,Syzygy Artists Co-Op,STudious STuesday,Other,1:30 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Co-working at Syzygy. Check in on our discord channel #studious-stuesdays to confirm time: <a href=""https://discord.com/channels/467106621072474113/1056994256176283718"">https://discord.com/channels/46",Syzygy
+2026-11-30,Syzygy Artists Co-Op,Open Jam,Community,8:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"You are welcome to join Syzygy's open jam nights! Please join our Discord channel and RSVP when we announce each event if you are planning to attend.
+Syzygy #jams channel: https://discord.gg/ATdcuqApA",Syzygy
+2026-12-01,Syzygy Artists Co-Op,Hobby Hangs,Community,7:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"It's time for another Hobby Hang at Syz! This week bring a hobby you've wanted to work on alongside people. Not sure what you want to do? That's okay! We have plenty of supplies for a good hobbyin', a",Syzygy
+2026-12-01,Syzygy Artists Co-Op,STudious STuesday,Other,1:30 PM,5:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,"Co-working at Syzygy. Check in on our discord channel #studious-stuesdays to confirm time: <a href=""https://discord.com/channels/467106621072474113/1056994256176283718"">https://discord.com/channels/46",Syzygy
+2026-12-02,Syzygy Artists Co-Op,Drink and Draw,Drink & Draw,6:00 PM,10:00 PM,,https://syzygysf.com/#events,https://www.instagram.com/syzygycoop,false,,,Syzygy
